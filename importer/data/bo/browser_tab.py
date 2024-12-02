@@ -19,7 +19,10 @@ class BrowserTabBo:
 
     async def _visit_page(self, page: Page):
         try:
+            print(" 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 ")
             await page.goto(self.start_url, timeout=120000)
+
+            print(" 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 ")
 
             # after visiting page we must authenticate to system, for some case we msut import ads on guest mode, so wee need these selectors to be load
             await page.wait_for_selector(
