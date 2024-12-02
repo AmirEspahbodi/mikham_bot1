@@ -76,10 +76,10 @@ class RuntimeResource(metaclass=Singleton):
                 BrowserPage("safari_page_2", safari_page2)
                 # BrowserPage("chrome_page_3", chrome_page3),
             ]
-            for page in self.browsers_pages:
-                page.page.on("console", lambda msg: logging.info(f"Console Log: {msg.text}"))
-                page.page.on("request", lambda req: logging.info(f"Request: {req.method} {req.url}"))
-                page.page.on("response", lambda res: logging.info(f"Response: {res.status} {res.url}"))
+            # for page in self.browsers_pages:
+            #     page.page.on("console", lambda msg: logging.info(f"Console Log: {msg.text}"))
+            #     page.page.on("request", lambda req: logging.info(f"Request: {req.method} {req.url}"))
+            #     page.page.on("response", lambda res: logging.info(f"Response: {res.status} {res.url}"))
 
 
     async def close_browser_tabs(self):
