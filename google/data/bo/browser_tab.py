@@ -34,7 +34,7 @@ class BrowserTabBo(BaseSearchBo):
             await page_search_box_input.type(search_query)
 
             await browser_page.page.wait_for_load_state("networkidle", timeout=120000)
-        except BaseException as e:
+        except Exception as e:
             # self.logger.error()
             print(
                 f"error in CompleteSearchBo in _do_search function\npage={browser_page.name}"
@@ -66,8 +66,10 @@ class BrowserTabBo(BaseSearchBo):
             await page.wait_for_load_state("networkidle", timeout=120000)
             await page.wait_for_timeout(randint(7000, 10000))
         except TimeoutError as e:
-            if recur <= 3:
-                await self.__visit_page(page, recur + 1, reload=True)
+            page_content = await page.content()
+            with open("../goto_google.html", 'w') as fw:
+                fw.write(page_content)
+                
 
     async def __complete_before_you_continue_page(self, page: Page):
         selector = "//div[contains(@role, 'main')]//div[contains(@class, 'AIC7ge')]//div[contains(@class, 'VtwTSb')]//form[@action='https://consent.google.com/save'][2]"

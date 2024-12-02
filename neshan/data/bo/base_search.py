@@ -33,7 +33,7 @@ class BaseSearchBo:
             await browser_page.page.wait_for_load_state("networkidle", timeout=120000)
             await browser_page.page.wait_for_timeout(randint(13000, 20000))
 
-        except BaseException as e:
+        except Exception as e:
             # self.logger.error()
             print(
                 f"error in CompleteSearchBo in _do_search function\npage={browser_page.name}"

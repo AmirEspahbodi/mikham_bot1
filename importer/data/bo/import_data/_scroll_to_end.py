@@ -34,7 +34,7 @@ async def scroll_to_end(page: Page, scroll_tag_selector: str, scroll_tag_count: 
 
             previously_counted = scraped_listings_count
 
-        except BaseException as e:
+        except Exception as e:
             error_count += 1
             print(
                 f"\nerror in CompleteSearchBo in __scroll function\nerror count = {error_count}\n"

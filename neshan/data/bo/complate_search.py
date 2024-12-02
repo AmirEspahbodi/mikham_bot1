@@ -62,7 +62,7 @@ class CompleteSearchBo(BaseSearchBo):
 
                 previously_counted = scraped_listings_count
 
-            except BaseException as e:
+            except Exception as e:
                 error_count += 1
                 print(
                     f"\nerror in CompleteSearchBo in __scroll function\npage={browser_page.name}\nerror count = {error_count}\n"

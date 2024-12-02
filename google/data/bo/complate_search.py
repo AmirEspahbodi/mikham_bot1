@@ -62,7 +62,7 @@ class CompleteSearchBo(BaseSearchBo):
 
                 previously_counted = scraped_listings_count
 
-            except BaseException as e:
+            except Exception as e:
                 if not await browser_page.page.locator(
                     '//div[contains(@class, "m6QErb WNBkOb XiKgde")]//div[contains(@class, "lMbq3e")]'
                 ).is_visible():
