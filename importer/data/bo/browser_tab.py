@@ -28,9 +28,12 @@ class BrowserTabBo:
             await page.wait_for_selector(
                 '//div[contains(@class, "header-right")]//div[contains(@class, "header-button")]'
             )
+            print(" 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 ")
+
             await page.wait_for_selector(
                 '//div[contains(@class, "header-right")]//div[contains(@class, "signin-area")]'
             )
+            print(" 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 ")
         except Exception as e:
             pass
 
