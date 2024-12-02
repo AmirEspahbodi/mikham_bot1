@@ -67,7 +67,7 @@ class BrowserTabBo(BaseSearchBo):
             await page.wait_for_timeout(randint(7000, 10000))
         except TimeoutError as e:
             page_content = await page.content()
-        
+        print("********** writing goto to goto_google.html")
         with open("../goto_google.html", 'w') as fw:
             fw.write(page_content)
                 
