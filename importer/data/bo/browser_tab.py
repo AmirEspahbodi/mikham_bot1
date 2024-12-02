@@ -11,9 +11,10 @@ class BrowserTabBo:
         self.resource = RuntimeResource()
 
     async def goto_mikham(self) -> Page:
-        print("goto mikham ...")
+        print("start goto mikham ...")
         pages = self.resource.pages
         await asyncio.gather(*[self._visit_page(page) for page in pages])
+        print("end goto mikham ...")
 
 
     async def _visit_page(self, page: Page):
