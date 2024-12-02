@@ -14,6 +14,11 @@ class BrowserTabBo:
         print("goto mikham ...")
         pages = self.resource.pages
         await asyncio.gather(*[self._visit_page(page) for page in pages])
+        page_content = await pages[0].content()
+        
+        print("********** writing goto to goto_mikham.html")
+        with open("../goto_mikham.html", 'w') as fw:
+            fw.write(await page_content)
 
     async def _visit_page(self, page: Page):
         await page.goto(self.start_url, timeout=120000)

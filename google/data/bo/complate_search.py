@@ -23,7 +23,7 @@ class CompleteSearchBo(BaseSearchBo):
             *[self.__scroll(browser_page) for browser_page in browsers_pages]
         )
 
-    async def __scroll(self, browser_page: BrowserPage, total=20):
+    async def __scroll(self, browser_page: BrowserPage, total=200):
         # this variable is used to detect if the bot
         # scraped the same number of listings in the previous iteration
 

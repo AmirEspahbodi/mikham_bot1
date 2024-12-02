@@ -67,9 +67,7 @@ class BrowserTabBo(BaseSearchBo):
             await page.wait_for_timeout(randint(7000, 10000))
         except TimeoutError as e:
             pass
-        print("********** writing goto to goto_google.html")
-        with open("../goto_google_first.html", 'w') as fw:
-            fw.write(await page.content())
+
                 
 
     async def __complete_before_you_continue_page(self, page: Page):
@@ -79,7 +77,4 @@ class BrowserTabBo(BaseSearchBo):
             await accept_all.click(timeout=120000)
             await page.wait_for_timeout(randint(13000, 20000))
 
-        print("********** writing goto to goto_google.html")
-        with open("../goto_google_second.html", 'w') as fw:
-            fw.write(await page.content())
                 
