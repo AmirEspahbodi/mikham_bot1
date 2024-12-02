@@ -68,13 +68,18 @@ class BrowserTabBo(BaseSearchBo):
         except TimeoutError as e:
             pass
         print("********** writing goto to goto_google.html")
-        with open("../goto_google.html", 'w') as fw:
+        with open("../goto_google_first.html", 'w') as fw:
             fw.write(await page.content())
                 
 
     async def __complete_before_you_continue_page(self, page: Page):
-        selector = "//div[contains(@role, 'main')]//div[contains(@class, 'AIC7ge')]//div[contains(@class, 'VtwTSb')]//form[@action='https://consent.google.com/save'][2]"
+        selector = "//div[contains(@class, 'saveButtonContainer')][1]//form[@action='https://consent.google.com/save'][2]"
         accept_all = page.locator(selector)
         if await accept_all.count():
             await accept_all.click(timeout=120000)
             await page.wait_for_timeout(randint(13000, 20000))
+
+        print("********** writing goto to goto_google.html")
+        with open("../goto_google_second.html", 'w') as fw:
+            fw.write(await page.content())
+                
