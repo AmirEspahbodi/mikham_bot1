@@ -361,10 +361,10 @@ class RuntimeResource(metaclass=Singleton):
             ).new_page()
         )
         
-        for page in self.pages:
-            page.on("console", lambda msg: logging.info(f"Console Log: {msg.text}"))
-            page.on("request", lambda req: logging.info(f"Request: {req.method} {req.url}"))
-            page.on("response", lambda res: logging.info(f"Response: {res.status} {res.url}"))
+        # for page in self.pages:
+        #     page.on("console", lambda msg: logging.info(f"Console Log: {msg.text}"))
+        #     page.on("request", lambda req: logging.info(f"Request: {req.method} {req.url}"))
+        #     page.on("response", lambda res: logging.info(f"Response: {res.status} {res.url}"))
 
 
     async def free(self):
