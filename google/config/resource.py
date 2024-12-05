@@ -21,7 +21,7 @@ class RuntimeResource(metaclass=Singleton):
         self.browsers: dict[Literal["firefox", "safari", "chrome"], Browser] = {}
         self.browsers_pages: list[BrowserPage] = []
         self.playwright: AsyncPlaywright = None
-        logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+        # logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
     async def initialize_browsers(self):

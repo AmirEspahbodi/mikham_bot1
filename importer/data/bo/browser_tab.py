@@ -40,5 +40,5 @@ class BrowserTabBo:
         page_content = await page.content()
         
         print("********** writing goto to goto_mikham.html")
-        with open("../goto_mikham.html", 'w') as fw:
+        with open("../goto_mikham_visit_page.html", 'w') as fw:
             fw.write(page_content)

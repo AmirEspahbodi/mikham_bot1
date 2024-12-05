@@ -42,7 +42,7 @@ class CompleteSearchBo(BaseSearchBo):
                 await browser_page.page.wait_for_load_state(
                     "networkidle", timeout=120000
                 )
-                await browser_page.page.wait_for_timeout(randint(7000, 10000))
+                await browser_page.page.wait_for_timeout(randint(3000, 5000))
                 scraped_listings_count = await browser_page.page.locator(
                     '//a[contains(@href, "https://www.google.com/maps/place")]'
                 ).count()
@@ -57,8 +57,10 @@ class CompleteSearchBo(BaseSearchBo):
 
                 if scraped_listings_count == previously_counted:
                     is_reached_end += 1
-                    if is_reached_end >= 2:
+                    if is_reached_end > 2:
                         break
+                else:
+                    is_reached_end=0
 
                 previously_counted = scraped_listings_count
 

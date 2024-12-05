@@ -330,7 +330,7 @@ class RuntimeResource(metaclass=Singleton):
         self.browser: Browser = None
         self.pages: list[Page] = []
         self.playwright: AsyncPlaywright = None
-        logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+        # logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
     async def initialize_browsers(self):
