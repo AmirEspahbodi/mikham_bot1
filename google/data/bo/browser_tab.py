@@ -49,6 +49,8 @@ class BrowserTabBo(BaseSearchBo):
         await asyncio.gather(
             *[self.__visit_page(browser_page.page) for browser_page in browsers_pages]
         )
+
+
         with open("..goto_google_map__visit_page.html", 'w') as fw:
             fw.write(await browsers_pages[0].page.content())
 
@@ -61,12 +63,12 @@ class BrowserTabBo(BaseSearchBo):
 
     async def __visit_page(self, page: Page, recur=1, reload=False):
         try:
+            await page.wait_for_timeout(randint(5000, 10000))
             if not reload:
                 await page.goto(self.start_url, timeout=30000 + recur * 30000)
             else:
                 await page.reload(timeout=30000 + recur * 30000)
-            await page.wait_for_load_state("networkidle", timeout=120000)
-            await page.wait_for_timeout(randint(7000, 10000))
+            await page.wait_for_load_state("networkidle", timeout=30000 + recur * 30000)
         except TimeoutError as e:
             print(f"try recur = {recur}\nERROR={e}")
             if recur>=3:
