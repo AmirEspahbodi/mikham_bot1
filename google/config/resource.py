@@ -30,8 +30,8 @@ class RuntimeResource(metaclass=Singleton):
             self.playwright = await async_playwright().start()
             self.browsers = {
                 # "firefox": await self.playwright.firefox.launch(headless=False),
-                "safari": await self.playwright.webkit.launch(headless=True),
-                "chrome": await self.playwright.chromium.launch(headless=True),
+                "safari": await self.playwright.webkit.launch(headless=False),
+                "chrome": await self.playwright.chromium.launch(headless=False),
             }
 
 

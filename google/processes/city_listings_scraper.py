@@ -42,14 +42,12 @@ class CityListingsScraperProcess:
                     save_to_excel(
                         final_listings, listing_category, search_query, province
                     )
-
             except Exception as e:
-                self.redis_dao.remove_inprocessing()
                 print(f"SCRAPER ->Error: {e}")
                 traceback.print_exc()
                 await asyncio.sleep(2.5)
-
             finally:
+                self.redis_dao.remove_inprocessing()
                 await self.resource.close_browser_tabs()
                 await self.resource.free()
                 gc.collect()
