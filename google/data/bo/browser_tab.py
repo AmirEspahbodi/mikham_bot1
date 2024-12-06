@@ -51,8 +51,8 @@ class BrowserTabBo(BaseSearchBo):
         )
 
 
-        with open("..goto_google_map__visit_page.html", 'w') as fw:
-            fw.write(await browsers_pages[0].page.content())
+        # with open("..goto_google_map__visit_page.html", 'w') as fw:
+        #     fw.write(await browsers_pages[0].page.content())
 
         await asyncio.gather(
             *[
