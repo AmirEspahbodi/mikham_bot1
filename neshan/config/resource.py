@@ -27,9 +27,9 @@ class RuntimeResource(metaclass=Singleton):
             self.playwright = await async_playwright().start()
             self.browser_type = "chrome" if random.randint(0, 1) == 0 else "safari"
             self.browser = (
-                await self.playwright.webkit.launch(headless=False)
+                await self.playwright.webkit.launch(headless=True)
                 if self.browser_type == "safari"
-                else await self.playwright.chromium.launch(headless=False)
+                else await self.playwright.chromium.launch(headless=True)
             )
 
     async def close_browser_tabs(self):
