@@ -337,7 +337,7 @@ class RuntimeResource(metaclass=Singleton):
         if not self.browser:
             print("importer ->initializing playwright ...")
             self.playwright = await async_playwright().start()
-            self.browser = await self.playwright.chromium.launch(headless=True)
+            self.browser = await self.playwright.chromium.launch(headless=False)
 
     async def initialize_tabs(self):
         self.pages.append(
