@@ -1,0 +1,64 @@
+import asyncio
+import traceback
+from random import randint
+from data.bo import ScrapDataBo, CompleteSearchBo, BrowserTabBo
+from data.dao import RedisDao
+from config import RuntimeResource, AppConfig
+from utils import save_to_excel
+import gc
+
+
+class CityListingsScraperProcess:
+    def __init__(self):
+        self.resource = RuntimeResource()
+        self.start_url = f"https://neshan.org/maps"
+        self.browser_tab_bo = BrowserTabBo(self.start_url)
+        self.scrap_data_bo = ScrapDataBo()
+        self.complete_search_bo = CompleteSearchBo()
+        self.redis_dao = RedisDao()
+
+    async def start(self):
+        while True:
+            try:
+                queue_data = self._redis_get_search_query()
+
+                if queue_data is None:
+                    self.redis_dao.remove_inprocessing()
+                    print("NESHAN ->queue is empty")
+                    await asyncio.sleep(20)
+                    continue
+                print(f"NESHAN ->queue_data = {type(queue_data)}")
+                print(f"NESHAN ->queue_data = {queue_data}")
+
+                listing_category, search_query, province = queue_data
+
+                await self.resource.initialize_browsers()
+                await self.resource.open_browser_tabs()
+
+                await self.browser_tab_bo.goto_neshan()
+                await self.complete_search_bo.complete_search(search_query)
+                final_listings = await self.scrap_data_bo.scrap_page(search_query)
+                if final_listings:
+                    save_to_excel(
+                        final_listings, listing_category, search_query, province
+                    )
+
+                await self.resource.close_browser_tabs()
+                await self.resource.free()
+                gc.collect()
+
+                # await asyncio.sleep(randint(10, 15))
+            except Exception as e:
+                await self.resource.close_browser_tabs()
+                await self.resource.free()
+                self.redis_dao.remove_inprocessing()
+                print(f"NESHAN ->Error: {e}")
+                traceback.print_exc()
+                await asyncio.sleep(randint(10, 15))
+
+    def _redis_get_search_query(self):
+        re = self.redis_dao.dequeue()
+        if not re:
+            return re
+        self.redis_dao.set_inprocessing(re)
+        return [d.strip() for d in re.split(AppConfig.LISTING_NAME_ITEMS_SEPARATOR)]
